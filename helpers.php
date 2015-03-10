@@ -98,7 +98,62 @@ if ( ! function_exists( "object_column" ) )
     }
 }
 
+function head()
+{
+
+}
+
+function last()
+{
+
+}
+
 // String helpers
+
+function snake_case()
+{
+
+}
+
+function camel_case()
+{
+
+}
+
+function studly_case()
+{
+
+}
+
+function starts_with()
+{
+
+}
+
+function ends_with()
+{
+
+}
+
+function str_contains()
+{
+
+}
+
+function str_is()
+{
+
+}
+
+function str_quick_random()
+{
+
+}
+
+function str_secure_random()
+{
+
+}
 
 // Miscellaneous heleprs
 
