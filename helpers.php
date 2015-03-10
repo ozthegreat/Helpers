@@ -4,6 +4,7 @@
  * that they can be used in WordPress
  */
 
+// Array Heleprs
 
 /**
  * array_column was added in PHP >= 5.5.
@@ -21,30 +22,98 @@
  * // Returns
  * array( 2, 3, 5 );
  *
- * @param array $array The array to pull values from
- * @param string $column_key The value to pull from the array
- * @param string $index_key Optional argument for specifiying the index key
- * @return array A new array of values plucked from the original
+ * @param  array  $collection The array to pull values from
+ * @param  string $columnKey  The value to pull from each array
+ * @param  string $indexKey   Optional argument for specifiying the index key
+ * @return array  A new array of values plucked from the original
  */
 if ( ! function_exists( "array_column" ) )
 {
-    function array_column( array $array, $columnKey, $indexKey = null)
+    function array_column( array $collection, $columnKey, $indexKey = null)
     {
-        $newArray = array();
-        foreach ( $array as $item )
+        $newCollection = array();
+        foreach ( $collection as $item )
         {
             // If an indexKey is specified && it isset && the columnKey isset
             if ( ! is_null( $indexKey ) && isset( $item[ $indexKey ] ) && isset( $item[ $columnKey ] ) )
             {
-                $newArray[ $item[ $indexKey ] ] = $item[ $columnKey ];
+                $newCollection[ $item[ $indexKey ] ] = $item[ $columnKey ];
             }
 
             // Else if just the columnKey isset
             elseif ( isset( $item[ $columnKey ] ) )
             {
-                $newArray[] = $item[ $columnKey ];
+                $newCollection[] = $item[ $columnKey ];
             }
         }
-        return $newArray;
+        return $newCollection;
+    }
+}
+
+
+// Object helpers
+
+/**
+ * object_column doesn't exist but would be useful. Vry similair to array_column,
+ * given an array of objects it will pull a value from each of them and return
+ * an array with the new values.
+ *
+ * @example
+ * $people = array(
+ * 	array( 'id' => 2, 'name' => 'Tom' ),
+ * 	array( 'id' => 3, 'name' => 'Dick' ),
+ * 	array( 'id' => 5, 'name' => 'Harry' ),
+ * );
+ *
+ * $ids = object_column( $people, 'id' );
+ *
+ * // Returns
+ * array( 2, 3, 5 );
+ *
+ * @param  array  $collection The array of objects to pull values from
+ * @param  string $columnKey  The value to pull from each object
+ * @param  string $indexKey   Optional argument for specifiying the index key
+ * @return array  A new array of values plucked from the original
+ */
+if ( ! function_exists( "object_column" ) )
+{
+    function object_column( array $collection, $columnKey, $indexKey = null)
+    {
+        $newCollection = array();
+        foreach ( $collection as $item )
+        {
+            // If an indexKey is specified && it isset && the columnKey isset
+            if ( ! is_null( $indexKey ) && isset( $item->$indexKey ) && isset( $item->$columnKey ) )
+            {
+                $newCollection[ $item->$indexKey ] = $item->$columnKey;
+            }
+
+            // Else if just the columnKey isset
+            elseif ( isset( $item->$columnKey ) )
+            {
+                $newCollection[] = $item->$columnKey;
+            }
+        }
+        return $newCollection;
+    }
+}
+
+// String helpers
+
+// Miscellaneous heleprs
+
+/**
+ * Dump & die. Really usefull for debugging. Does exactly what it says, prints
+ * to screen then dies.
+ *
+ * @param  mixed $anything Anything you wish to view on screen
+ * @return void
+ */
+if ( ! function_exists("dd") )
+{
+    function dd($anything)
+    {
+        var_dump($anything);
+        die;
     }
 }
